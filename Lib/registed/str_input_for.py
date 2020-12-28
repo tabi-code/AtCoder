@@ -1,0 +1,2 @@
+ = str(input().rstrip('\n'))
+ 

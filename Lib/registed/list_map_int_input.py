@@ -1,0 +1,1 @@
+ = list(map(int, input().rstrip('\n').split()))
