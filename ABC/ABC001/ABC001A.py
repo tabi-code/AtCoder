@@ -1,2 +1,3 @@
-class AlgLca(object):
-    def __init__(self, graph, root=0):
+import itertools
+
+print(list(itertools.product(range(10), repeat=10)))

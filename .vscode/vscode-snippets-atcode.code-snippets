@@ -1,0 +1,384 @@
+{
+	// Place your snippets for python here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+	// "Print to console": {
+	// 	"prefix": "log",
+	// 	"body": [
+	// 		"console.log('$1');",
+	// 		"$2"
+	// 	],
+	// 	"description": "Log output to console"
+	// }
+	"solve": {
+		"prefix": "solve",
+		"body": [
+		  "import sys",
+		  "import math",
+		  "import collections",
+		  "import itertools",
+		  "import bisect",
+		  "import heapq",
+		  "import fractions",
+		  "from operator import mul",
+		  "from functools import reduce",
+		  "from functools import lru_cache",
+		  "",
+		  "",
+		  "def solve():",
+		  "    input = sys.stdin.readline",
+		  "    mod = 10 ** 9 + 7",
+		  "    $1",
+		  "",
+		  "",
+		  "if __name__ == '__main__':",
+		  "    solve()",
+		  ""
+		],
+		"description": "solve"
+	  },
+	  "for_in": {
+		"prefix": "for_in",
+		"body": [
+		  "for $1 in $2:"
+		],
+		"description": "for_in"
+	  },
+	  "int_input": {
+		"prefix": "int_input",
+		"body": [
+		  "$1 = int(input().rstrip('\\n'))"
+		],
+		"description": "int_input"
+	  },
+	  "int_input_for": {
+		"prefix": "int_input_for",
+		"body": [
+		  "$1 = [int(input().rstrip('\\n')) for _ in range($2)]"
+		],
+		"description": "int_input_for"
+	  },
+	  "str_input": {
+		"prefix": "str_input",
+		"body": [
+		  "$1 = $2str(input().rstrip('\\n'))$3"
+		],
+		"description": "str_input"
+	  },
+	  "for_in_range": {
+		"prefix": "for_in_range",
+		"body": [
+		  "for $1 in range($2):"
+		],
+		"description": "for_in_range"
+	  },
+	  "str_input_for": {
+		"prefix": "str_input_for",
+		"body": [
+		  "$1 = [$2str(input().rstrip('\\n'))$3 for _ in range($4)]"
+		],
+		"description": "str_input_for"
+	  },
+	  "list_map_str_input": {
+		"prefix": "list_map_str_input",
+		"body": [
+		  "$1 = list(map(str, str(input().rstrip('\\n')).split()))"
+		],
+		"description": "list_map_str_input"
+	  },
+	  "list_map_int_input": {
+		"prefix": "list_map_int_input",
+		"body": [
+		  "$1 = list(map(int, input().rstrip('\\n').split()))"
+		],
+		"description": "list_map_int_input"
+	  },
+	  "alg_segment_tree": {
+		"prefix": "alg_segment_tree",
+		"body": [
+		  "class SegmentTree:",
+		  "    def __init__(self, size, f=lambda x, y: x + y, default=0):",
+		  "        self.size = 2 ** (size - 1).bit_length()",
+		  "        self.default = default",
+		  "        self.dat = [default] * (self.size * 2)",
+		  "        self.f = f",
+		  "",
+		  "    def update(self, i, x):",
+		  "        i += self.size",
+		  "        self.dat[i] = x",
+		  "        while i > 0:",
+		  "            i >>= 1",
+		  "            self.dat[i] = self.f(self.dat[i * 2], self.dat[i * 2 + 1])",
+		  "",
+		  "    def query(self, left, right):",
+		  "        left += self.size",
+		  "        right += self.size",
+		  "        left_res, right_res = self.default, self.default",
+		  "        while left < right:",
+		  "            if left & 1:",
+		  "                left_res = self.f(left_res, self.dat[left])",
+		  "                left += 1",
+		  "",
+		  "            if right & 1:",
+		  "                right -= 1",
+		  "                right_res = self.f(self.dat[right], right_res)",
+		  "            left >>= 1",
+		  "            right >>= 1",
+		  "        res = self.f(left_res, right_res)",
+		  "        return res"
+		],
+		"description": "alg_segment_tree"
+	  },
+	  "alg_union_find": {
+		"prefix": "alg_union_find",
+		"body": [
+		  "class UnionFind():",
+		  "    def __init__(self, n):",
+		  "        self.n = n",
+		  "        self.parents = [-1] * n",
+		  "",
+		  "    def find(self, x):",
+		  "        if self.parents[x] < 0:",
+		  "            return x",
+		  "        else:",
+		  "            self.parents[x] = self.find(self.parents[x])",
+		  "            return self.parents[x]",
+		  "",
+		  "    def union(self, x, y):",
+		  "        x = self.find(x)",
+		  "        y = self.find(y)",
+		  "",
+		  "        if x == y:",
+		  "            return",
+		  "",
+		  "        if self.parents[x] > self.parents[y]:",
+		  "            x, y = y, x",
+		  "",
+		  "        self.parents[x] += self.parents[y]",
+		  "        self.parents[y] = x",
+		  "",
+		  "    def size(self, x):",
+		  "        return -self.parents[self.find(x)]",
+		  "",
+		  "    def same(self, x, y):",
+		  "        return self.find(x) == self.find(y)",
+		  "",
+		  "    def members(self, x):",
+		  "        root = self.find(x)",
+		  "        return [i for i in range(self.n) if self.find(i) == root]",
+		  "",
+		  "    def roots(self):",
+		  "        return [i for i, x in enumerate(self.parents) if x < 0]",
+		  "",
+		  "    def group_count(self):",
+		  "        return len(self.roots())",
+		  "",
+		  "    def all_group_members(self):",
+		  "        return {r: self.members(r) for r in self.roots()}",
+		  "",
+		  "    def __str__(self):",
+		  "        return '\\n'.join('{}: {}'.format(r, self.members(r)) for r in self.roots())"
+		],
+		"description": "alg_union_find"
+	  },
+	  "alg_permutation": {
+		"prefix": "alg_permutation",
+		"body": [
+		  "def permutation(n, r):",
+		  "    if r == 0:",
+		  "        return 1",
+		  "    else:",
+		  "        denominator = 1",
+		  "        for i in range(n, n - r, -1):",
+		  "            denominator = (denominator * i)",
+		  "        return denominator // 1",
+		  ""
+		],
+		"description": "alg_permutation"
+	  },
+	  "alg_permutation_mod": {
+		"prefix": "alg_permutation_mod",
+		"body": [
+		  "def permutation_mod(n, r, mod):",
+		  "    if r == 0:",
+		  "        return 1",
+		  "    else:",
+		  "        denominator = 1",
+		  "        for i in range(n, n - r, -1):",
+		  "            denominator = (denominator * i) % mod",
+		  "        return denominator // 1",
+		  ""
+		],
+		"description": "alg_permutation_mod"
+	  },
+	  "alg_memoization_recursion": {
+		"prefix": "alg_memoization_recursion",
+		"body": [
+		  "@lru_cache(maxsize=None)",
+		  "def memo_func():"
+		],
+		"description": "alg_memoization_recursion"
+	  },
+	  "alg_factorial": {
+		"prefix": "alg_factorial",
+		"body": [
+		  "def factorial(denominator_no):",
+		  "    return math.factorial(denominator_no)"
+		],
+		"description": "alg_factorial"
+	  },
+	  "alg_factorial_mod": {
+		"prefix": "alg_factorial_mod",
+		"body": [
+		  "def factorial_mod(denominator_no, molecule_list, mod):",
+		  "    denominator = 1",
+		  "    for i in range(1, denominator_no + 1):",
+		  "        denominator = (denominator * i) % mod",
+		  "    molecule = 1",
+		  "    for molecule_no in molecule_list:",
+		  "        for i in range(1, molecule_no + 1):",
+		  "            molecule = (molecule * i) % mod",
+		  "    return denominator * pow(molecule, mod - 2, mod) % mod",
+		  ""
+		],
+		"description": "alg_factorial_mod"
+	  },
+	  "alg_combination_mod": {
+		"prefix": "alg_combination_mod",
+		"body": [
+		  "def combination_mod(n, r, mod):",
+		  "    r = min(n - r, r)",
+		  "    if r == 0:",
+		  "        return 1",
+		  "    else:",
+		  "        denominator = 1",
+		  "        for i in range(n, n - r, -1):",
+		  "            denominator = (denominator * i) % mod",
+		  "        molecule = 1",
+		  "        for i in range(1, r + 1):",
+		  "            molecule = (molecule * i) % mod",
+		  "        return denominator * pow(molecule, mod - 2, mod) % mod",
+		  ""
+		],
+		"description": "combination_mod"
+	  },
+	  "alg_combination": {
+		"prefix": "alg_combination",
+		"body": [
+		  "def combination(n, r):",
+		  "    r = min(n - r, r)",
+		  "    if r == 0:",
+		  "        return 1",
+		  "    else:",
+		  "        denominator = 1",
+		  "        for i in range(n, n - r, -1):",
+		  "            denominator = (denominator * i)",
+		  "        molecule = 1",
+		  "        for i in range(1, r + 1):",
+		  "            molecule = (molecule * i)",
+		  "        return denominator // molecule",
+		  ""
+		],
+		"description": "alg_combination"
+	  },
+	  "alg_duplicate_combination_mod": {
+		"prefix": "alg_duplicate_combination_mod",
+		"body": [
+		  "def duplicate_combination_mod(n, r, mod):",
+		  "    n = n + r - 1",
+		  "    r = min(n - r, r)",
+		  "    if r == 0:",
+		  "        return 1",
+		  "    else:",
+		  "        denominator = 1",
+		  "        for i in range(n, n - r, -1):",
+		  "            denominator = (denominator * i) % mod",
+		  "        molecule = 1",
+		  "        for i in range(1, r + 1):",
+		  "            molecule = (molecule * i) % mod",
+		  "        return denominator * pow(molecule, mod - 2, mod) % mod",
+		  ""
+		],
+		"description": "alg_duplicate_combination_mod"
+	  },
+	  "alg_duplicate_combination": {
+		"prefix": "alg_duplicate_combination",
+		"body": [
+		  "def duplicate_combination(n, r):",
+		  "    n = n + r - 1",
+		  "    r = min(n - r, r)",
+		  "    if r == 0:",
+		  "        return 1",
+		  "    else:",
+		  "        denominator = 1",
+		  "        for i in range(n, n - r, -1):",
+		  "            denominator = (denominator * i)",
+		  "        molecule = 1",
+		  "        for i in range(1, r + 1):",
+		  "            molecule = (molecule * i)",
+		  "        return denominator // molecule",
+		  ""
+		],
+		"description": "alg_duplicate_combination"
+	  },
+	  "alg_lca": {
+		"prefix": "alg_lca",
+		"body": [
+		  "",
+		  "class Lca(object):",
+		  "    def __init__(self, graph, root=0):",
+		  "        self.graph = graph",
+		  "        self.root = root",
+		  "        self.n = len(graph)",
+		  "        self.bit_len = (self.n - 1).bit_length()",
+		  "        self.depth = [-1 if i != root else 0 for i in range(self.n)]",
+		  "        self.parent = [[-1] * self.n for _ in range(self.bit_len)]",
+		  "        self.bfs()",
+		  "        self.doubling()",
+		  "",
+		  "    def bfs(self):",
+		  "        ql = [[0, self.root]]",
+		  "        ql = collections.deque(ql)",
+		  "        fq = collections.defaultdict(list)",
+		  "        fq[self.root] = 0",
+		  "        while True:",
+		  "            if len(ql) != 0:",
+		  "                cost, tmp = ql.popleft()",
+		  "                for tmv in self.graph[tmp]:",
+		  "                    if tmv not in fq:",
+		  "                        ql.append([cost + 1, tmv])",
+		  "                        fq[tmv] = cost + 1",
+		  "            else:",
+		  "                break",
+		  "",
+		  "    def doubling(self):",
+		  "        for i in range(1, self.bit_len):",
+		  "            for v in range(self.n):",
+		  "                if self.parent[i - 1][v] != -1:",
+		  "                    self.parent[i][v] = self.parent[i - 1][self.parent[i - 1][v]]",
+		  "",
+		  "    def get(self, u, v):",
+		  "        if self.depth[v] < self.depth[u]:",
+		  "            u, v = v, u",
+		  "        du = self.depth[u]",
+		  "        dv = self.depth[v]",
+		  "",
+		  "        for i in range(self.bit_len):",
+		  "            if (dv - du) >> i & 1:",
+		  "                v = self.parent[i][v]",
+		  "        if u == v:",
+		  "            return u",
+		  "",
+		  "        for i in range(self.bit_len - 1, -1, -1):",
+		  "            pu, pv = self.parent[i][u], self.parent[i][v]",
+		  "            if pu != pv:",
+		  "                u, v = pu, pv",
+		  "        return self.parent[0][u]"
+		],
+		"description": "alg_lca"
+	  }
+
+	
+}
