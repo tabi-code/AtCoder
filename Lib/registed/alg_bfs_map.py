@@ -1,13 +1,13 @@
-tmd = collections.defaultdict(list)
-for i in range($N$):
-    tma, tmb = list(map(int, input().rstrip('\n').split()))
-    tmd[tma-1] += [tmb-1]
-    tmd[tmb-1] += [tma-1]
+mpl = collections.defaultdict(list)
+for i in range():
+    mpa, mpb = list(map(int, input().rstrip('\n').split()))
+    mpl[mpa-1] += [mpb-1]
+    mpl[mpb-1] += [mpa-1]
     
-ql = [[0, $FQ$]]
+ql = [[0, ]]
 ql = collections.deque(ql)
 fq = collections.defaultdict(list)
-fq[$FQ$]
+fq[]
 while True:
     if len(ql) != 0:
         cost, tmp = ql.popleft()

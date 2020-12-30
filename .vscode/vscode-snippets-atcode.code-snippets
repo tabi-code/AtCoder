@@ -378,7 +378,99 @@
 		  "        return self.parent[0][u]"
 		],
 		"description": "alg_lca"
+	  },
+	  "alg_warsal_floyd": {
+		"prefix": "alg_warsal_floyd",
+		"body": [
+		  "wn = list(map(int, input().rstrip('\\n').split()))",
+		  "inf = 10 ** 13",
+		  "wl = [[inf] * wn for _ in range(wn)]",
+		  "for i in range(wn):",
+		  "    wl[i][i] = 0",
+		  "",
+		  "for i in range(wn):",
+		  "    wa, wb, wc = list(map(int, input().rstrip('\\n').split()))",
+		  "    wl[wa - 1][wb - 1] = wc",
+		  "    wl[wb - 1][wa - 1] = wc",
+		  "",
+		  "for i in range(wn):",
+		  "    for j in range(wn):",
+		  "        for k in range(wn):",
+		  "            wl[j][k] = min(wl[j][k], wl[j][i] + wl[i][k])",
+		  "$1"
+		],
+		"description": "alg_warsal_floyd"
+	  },
+	  "alg_z_algorithm": {
+		"prefix": "alg_z_algorithm",
+		"body": [
+		  "st = $1",
+		  "st_len = len(st)",
+		  "z_algorithm = [0] * st_len",
+		  "z_i = 1",
+		  "z_j = 0",
+		  "while z_i < st_len:",
+		  "    while z_i + z_j < st_len and st[z_j] == st[z_i + z_j]:",
+		  "        z_j += 1",
+		  "    z_algorithm[z_i] = z_j",
+		  "    if z_j == 0:",
+		  "        z_i += 1",
+		  "        continue",
+		  "    z_k = 1",
+		  "    while z_i + z_k < st_len and z_k + z_algorithm[z_k] < z_j:",
+		  "        z_algorithm[z_i + z_k] = z_algorithm[z_k]",
+		  "        z_k += 1",
+		  "    z_i += z_k",
+		  "    z_j -= z_k",
+		  "print(z_algorithm)",
+		  ""
+		],
+		"description": "alg_z_algorithm"
+	  },
+	  "alg_bfs_tree": {
+		"prefix": "alg_bfs_tree",
+		"body": [
+		  "mpl = collections.defaultdict(list)",
+		  "for i in range($1):",
+		  "    mpa, mpb = list(map(int, input().rstrip('\\n').split()))",
+		  "    mpl[mpa-1] += [mpb-1]",
+		  "    mpl[mpb-1] += [mpa-1]",
+		  "    ",
+		  "ql = [[0, $2]]",
+		  "ql = collections.deque(ql)",
+		  "fq = collections.defaultdict(list)",
+		  "fq[$3]",
+		  "while True:",
+		  "    if len(ql) != 0:",
+		  "        cost, tmp = ql.popleft()",
+		  "        for tmv in tmd[tmp]:",
+		  "            if tmv not in fq:",
+		  "                ql.append([cost + 1, tmv])",
+		  "                fq[tmv]",
+		  "    else:",
+		  "        break"
+		],
+		"description": "alg_bfs_tree"
+	  },
+	  "alg_bfs_grid": {
+		"prefix": "alg_bfs_grid",
+		"body": [
+		  "ql = [[0, $1]]",
+		  "ql = collections.deque(ql)",
+		  "fq = collections.defaultdict(list)",
+		  "fq[$1]",
+		  "while True:",
+		  "    if len(ql) != 0:",
+		  "        cost, yv, xv = ql.popleft()",
+		  "        for yv, xv in [[yv + 1, xv], [yv - 1, xv], [yv, xv + 1], [yv, xv - 1]]:",
+		  "            if 0 <= yv < h and 0 <= xv < w:",
+		  "                if (yv, xv) not in fq:",
+		  "                    ql.append([cost + 1, yv, xv])",
+		  "                    fq[yv, xv]",
+		  "    else:",
+		  "        break"
+		],
+		"description": "alg_bfs_grid"
 	  }
-
 	
 }

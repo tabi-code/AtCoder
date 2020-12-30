@@ -1,3 +1,4 @@
+wn = list(map(int, input().rstrip('\n').split()))
 inf = 10 ** 13
 wl = [[inf] * wn for _ in range(wn)]
 for i in range(wn):
@@ -11,4 +12,4 @@ for i in range(wn):
 for i in range(wn):
     for j in range(wn):
         for k in range(wn):
-            wl[j][k] = min(wl[j][k], wl[j][i] + wl[i][k])$END$
+            wl[j][k] = min(wl[j][k], wl[j][i] + wl[i][k])
