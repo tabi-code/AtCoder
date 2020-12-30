@@ -32,7 +32,7 @@ def main():
     res = requests.get(contest_url)
     for contest in res.json():
         mkdir(contest["contest_id"])
-        #mkfile(contest["contest_id"], contest["problem_id"])
+        mkfile(contest["contest_id"], contest["problem_id"])
 
 
 if __name__ == '__main__':

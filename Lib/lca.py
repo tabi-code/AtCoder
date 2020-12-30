@@ -1,4 +1,3 @@
-
 class Lca(object):
     def __init__(self, graph, root=0):
         self.graph = graph
@@ -16,7 +15,7 @@ class Lca(object):
         fq = collections.defaultdict(list)
         fq[self.root] = 0
         while True:
-            if len(ql) != 0:
+          if len(ql) != 0:
                 cost, tmp = ql.popleft()
                 for tmv in self.graph[tmp]:
                     if tmv not in fq:

@@ -1,4 +1,4 @@
-st = $1
+st = "対象文字列"
 st_len = len(st)
 z_algorithm = [0] * st_len
 z_i = 1
