@@ -1,4 +1,4 @@
-class SegmentTreeRMQRAQ:
+class SegmentTreeRangeAdd:
     def __init__(self, size, f=lambda x, y: min(x, y), default=2 ** 31 - 1):
         self.size = (size - 1).bit_length()
         self.no = 2 ** self.size
